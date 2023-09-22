@@ -45,7 +45,6 @@ const reducer = (state = initialState, action) => {
                 filterLoadingStatus: 'error'
             }
         case 'ACTIVE_FILTER_CHANGED':
-            console.log("ACTIVE_FILTER_CHANGED")
             return {
                 ...state,
                 activeFilter: action.payload,
