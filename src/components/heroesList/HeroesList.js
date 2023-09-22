@@ -6,9 +6,24 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import {heroesFetching, heroesFetched, heroesFetchingError, heroDeleted} from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
+import {createSelector} from "reselect";
 
 const HeroesList = () => {
-    const {filteredHeroes, heroesLoadingStatus} = useSelector(state => state);
+
+    const filteredHeroesSelector = createSelector(
+        (state) => state.filters.activeFilter,
+        (state) => state.heroes.heroes,
+        (filter, heroes) => {
+            if (filter === 'all') {
+                return heroes;
+            }
+            return heroes.filter(item => item.element === filter)
+        }
+    );
+
+    const filteredHeroes = useSelector(filteredHeroesSelector);
+
+    const heroesLoadingStatus = useSelector(state => state.heroesLoadingStatus);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
