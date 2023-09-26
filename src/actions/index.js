@@ -18,12 +18,7 @@ export const fetchFilter = (request) => (dispatch) => {
 
 export const heroesFetching = createAction('HEROES_FETCHING');
 
-export const heroesFetched = (heroes) => {
-    return {
-        type: 'HEROES_FETCHED',
-        payload: heroes
-    }
-}
+export const heroesFetched = createAction('HEROES_FETCHED');
 
 export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR');
 
